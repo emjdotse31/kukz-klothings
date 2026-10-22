@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kukz Klothings | Clothing in Ghana</title>
+<style>
+:root{--bg:#faf6f0;--ink:#2a211b;--mut:#7a6d62;--acc:#b4532a;--acc2:#2f4a3a;--line:#e6dccf;--card:#fff;box-sizing:border-box}
+*{box-sizing:border-box;margin:0}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);padding-top:env(safe-area-inset-top,0)}
+h1,h2,h3,.serif{font-family:Georgia,"Times New Roman",serif;font-weight:600}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+header{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;padding:12px 16px}
+.logo{font-size:20px;letter-spacing:.5px}.logo b{color:var(--acc)}
+#cartBtn{background:var(--ink);color:#fff;padding:8px 14px;border-radius:99px;font-size:14px}
+.hero{padding:44px 20px 36px;text-align:center;background:linear-gradient(160deg,#f3e3d0,#efd2bd)}
+.hero h2{font-size:34px;line-height:1.15;max-width:520px;margin:0 auto 10px}
+.hero p{color:var(--mut);margin-bottom:18px}
+.btn{display:inline-block;background:var(--acc);color:#fff;padding:12px 24px;border-radius:99px;font-weight:600}
+.chips{display:flex;gap:8px;padding:18px 16px 6px;overflow-x:auto}
+.chip{padding:8px 16px;border:1px solid var(--line);border-radius:99px;background:var(--card);white-space:nowrap;font-size:14px}
+.chip.on{background:var(--acc2);color:#fff;border-color:var(--acc2)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;padding:14px 16px 30px;max-width:1100px;margin:auto}
+@media(min-width:700px){.grid{grid-template-columns:repeat(3,1fr)}}@media(min-width:1000px){.grid{grid-template-columns:repeat(4,1fr)}}
+.card{background:var(--card);border-radius:14px;overflow:hidden;border:1px solid var(--line);text-align:left;display:block;width:100%}
+.ph{aspect-ratio:3/4;display:flex;align-items:flex-end;padding:10px;color:#fff;font-family:Georgia,serif;font-size:15px;text-shadow:0 1px 6px rgba(0,0,0,.35)}
+.card .in{padding:10px 12px 12px}.card h3{font-size:15px}.card .pr{color:var(--acc);font-weight:700;margin-top:4px}.card small{color:var(--mut)}
+.ov{position:fixed;inset:0;background:rgba(30,20,12,.5);z-index:40;display:none}.ov.on{display:block}
+.sheet{position:absolute;background:var(--bg);padding:18px 18px calc(18px + env(safe-area-inset-bottom,0));overflow:auto}
+#modal .sheet{left:0;right:0;bottom:0;max-height:92%;border-radius:20px 20px 0 0}
+@media(min-width:700px){#modal .sheet{left:50%;top:50%;bottom:auto;right:auto;transform:translate(-50%,-50%);width:440px;border-radius:20px}}
+#drawer .sheet{top:0;bottom:0;right:0;width:min(100%,400px)}
+.x{float:right;font-size:22px;line-height:1}
+.opt{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 14px}.o{padding:7px 14px;border:1px solid var(--line);border-radius:99px;background:#fff;font-size:14px}.o.on{border-color:var(--acc);background:var(--acc);color:#fff}
+label{font-size:13px;font-weight:600;color:var(--mut)}
+input,textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff;margin:4px 0 10px}
+.row{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.row .sw{width:48px;height:60px;border-radius:8px;flex:none}.row .t{flex:1;font-size:14px}
+.q button{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);background:#fff}
+.tot{display:flex;justify-content:space-between;font-size:18px;font-weight:700;margin:14px 0}
+.full{width:100%;text-align:center}
+footer{background:var(--ink);color:#e9ddd0;padding:28px 20px calc(28px + env(safe-area-inset-bottom,0));font-size:14px;line-height:1.7}
+footer h3{color:#fff;margin-bottom:6px}
+</style>
+<script src="https://js.paystack.co/v2/inline.js"></script>
+</head>
+<body>
+<header>
+  <div class="logo serif">Kukz <b>Klothings</b></div>
+  <button id="cartBtn">Cart (<span id="cnt">0</span>)</button>
+</header>
+
+<section class="hero">
+  <h2>Everyday style, made for Ghana</h2>
+  <p>Ankara, kente and linen pieces for women, men and kids.</p>
+  <a class="btn" href="#shop">Shop now</a>
+</section>
+
+<div class="chips" id="chips"></div>
+<main class="grid" id="shop"></main>
+
+<footer>
+  <h3 class="serif">Kukz Klothings</h3>
+  <p>Order here, we confirm on WhatsApp and arrange delivery.</p>
+  <p>Pay with MTN MoMo, Telecel Cash, AirtelTigo Money or on delivery.</p>
+  <p id="contact"></p>
+  <p style="margin-top:10px;opacity:.6">© 2026 Kukz Klothings · <a href="#admin" style="color:inherit">Staff</a></p>
+</footer>
+
+<div class="ov" id="modal"><div class="sheet" id="mbody"></div></div>
+<div class="ov" id="admin" style="z-index:60"><div class="sheet" id="abody" style="left:0;right:0;top:0;bottom:0"></div></div>
+<div class="ov" id="drawer"><div class="sheet" id="dbody"></div></div>
+
+<script>
+// ---- STORE SETTINGS: change these ----
+const STORE='Kukz Klothings', WA='233591464095', PHONE='059 146 4095', EMAIL='charityadofo1996@gmail.com';
+const PAYSTACK_KEY='pk_test_PASTE_YOUR_PUBLIC_KEY'; // Paystack PUBLIC key only (pk_...). Never put the secret key (sk_...) here. // WA = WhatsApp number, country code first, no + or spaces
+let P=[],loaded=false;
+const $=id=>document.getElementById(id);
+const fmt=n=>'GH₵'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+let cat='All',cart=[];
+try{cart=JSON.parse(localStorage.getItem('cart')||'[]')||[]}catch(e){}
+const save=()=>{try{localStorage.setItem('cart',JSON.stringify(cart))}catch(e){}};
+const grad=g=>`linear-gradient(155deg,${g[0]},${g[1]})`;
+const find=id=>P.find(x=>x.id===id);
+const bg=x=>x.img?"url('"+x.img+"') center/cover":grad(x.g);
+$('contact').innerHTML='WhatsApp / call: '+PHONE+'<br>Email: <a href="mailto:'+EMAIL+'" style="color:#fff">'+EMAIL+'</a>';
+
+function chips(){
+  $('chips').innerHTML=['All',...new Set(P.map(x=>x.c).filter(Boolean))].map(c=>`<button class="chip${c===cat?' on':''}" data-c="${c}">${c}</button>`).join('');
+}
+function grid(){
+  const l=P.filter(x=>cat==='All'||x.c===cat),m=t=>`<p style="grid-column:1/-1;text-align:center;color:var(--mut)">${t}</p>`;
+  $('shop').innerHTML=!loaded?m('Loading…'):!l.length?m('No products yet. Please check back soon.'):l.map(x=>`<button class="card" data-id="${x.id}"><div class="ph" style="background:${bg(x)}">${x.img?'':x.n}</div><div class="in"><h3>${x.n}</h3><small>${x.out?'Sold out':x.col.length+(x.col.length===1?' colour':' colours')}</small><div class="pr">${fmt(x.p)}</div></div></button>`).join('');
+}
+window.setProducts=l=>{P=l;loaded=true;if(cat!=='All'&&!P.some(x=>x.c===cat))cat='All';cart=cart.filter(i=>find(i.id));save();count();chips();grid()};
+$('chips').onclick=e=>{const c=e.target.dataset.c;if(c){cat=c;chips();grid()}};
+$('shop').onclick=e=>{const b=e.target.closest('.card');if(b)openProduct(b.dataset.id)};
+
+let sel={};
+function openProduct(id){
+  const x=find(id);sel={id,col:x.col[0],size:x.s[0]};
+  const opts=(arr,k)=>arr.map(v=>`<button class="o${sel[k]===v?' on':''}" data-k="${k}" data-v="${v}">${v}</button>`).join('');
+  $('mbody').innerHTML=`<button class="x" data-close="modal">×</button><div class="ph" style="background:${bg(x)};aspect-ratio:4/3;border-radius:14px;margin-bottom:12px">${x.img?'':x.n}</div><h2>${x.n}</h2><p style="color:var(--mut);margin:4px 0 8px">${x.d}</p><div class="pr" style="color:var(--acc);font-weight:700;font-size:18px">${fmt(x.p)}</div><label>Colour</label><div class="opt">${opts(x.col,'col')}</div><label>Size</label><div class="opt">${opts(x.s,'size')}</div>${x.out?'<p style="color:var(--acc);font-weight:700">Sold out</p>':'<button class="btn full" id="addBtn">Add to cart</button>'}`;
+  $('modal').classList.add('on');
+}
+$('mbody').onclick=e=>{
+  const t=e.target;
+  if(t.dataset.close)$('modal').classList.remove('on');
+  if(t.dataset.k){sel[t.dataset.k]=t.dataset.v;[...t.parentNode.children].forEach(c=>c.classList.toggle('on',c===t))}
+  if(t.id==='addBtn'){
+    const f=cart.find(i=>i.id===sel.id&&i.col===sel.col&&i.size===sel.size);
+    if(f)f.q++;else cart.push({...sel,q:1});
+    save();count();$('modal').classList.remove('on');openCart();
+  }
+};
+$('modal').onclick=e=>{if(e.target.id==='modal')$('modal').classList.remove('on')};
+
+const count=()=>$('cnt').textContent=cart.reduce((s,i)=>s+i.q,0);
+const total=()=>cart.reduce((s,i)=>s+find(i.id).p*i.q,0);
+
+function openCart(){
+  const rows=cart.map((i,k)=>{const x=find(i.id);return `<div class="row"><div class="sw" style="background:${bg(x)}"></div><div class="t"><b>${x.n}</b><br><small>${i.col}, ${i.size}</small><br>${fmt(x.p)}</div><div class="q"><button data-m="${k}">−</button> ${i.q} <button data-p="${k}">+</button></div></div>`}).join('');
+  $('dbody').innerHTML=`<button class="x" data-close="drawer">×</button><h2>Your cart</h2>`+(cart.length?`${rows}<div class="tot"><span>Total</span><span>${fmt(total())}</span></div>
+  <label>Your name</label><input id="cn" autocomplete="name">
+  <label>Phone number</label><input id="cp" type="tel" autocomplete="tel">
+  <label>Email (for your Paystack receipt)</label><input id="ce" type="email" autocomplete="email">
+  <label>Delivery address / area</label><textarea id="ca" rows="2"></textarea>
+  <button class="btn full" id="pay">Pay now with Paystack</button>
+  <button class="btn full" id="order" style="background:var(--acc2);margin-top:8px">Order on WhatsApp (pay on delivery)</button>
+  <p style="font-size:12px;color:var(--mut);margin-top:8px">We confirm stock and delivery on WhatsApp. Pay by Mobile Money or on delivery.</p>`:'<p style="margin-top:14px;color:var(--mut)">Your cart is empty.</p>');
+  $('drawer').classList.add('on');
+}
+function paid(ref,n,p,a,items,amt){
+  cart=[];save();count();
+  const msg=`PAID order from ${STORE}\nRef: ${ref}\n${items}\nTotal: ${fmt(amt)}\nName: ${n}\nPhone: ${p}\nDelivery: ${a}`;
+  $('dbody').innerHTML=`<button class="x" data-close="drawer">×</button><h2>Thank you!</h2><p style="margin:10px 0">Payment received. Your reference is <b>${ref}</b>.</p><p style="color:var(--mut);margin-bottom:14px">Tap below to send us your order details so we can arrange delivery.</p><a class="btn full" target="_blank" href="https://wa.me/${WA}?text=${encodeURIComponent(msg)}">Send order on WhatsApp</a>`;
+}
+$('cartBtn').onclick=openCart;
+$('drawer').onclick=e=>{
+  const t=e.target;
+  if(t.id==='drawer'||t.dataset.close)$('drawer').classList.remove('on');
+  if(t.dataset.p!==undefined){cart[+t.dataset.p].q++;save();count();openCart()}
+  if(t.dataset.m!==undefined){const k=+t.dataset.m;if(--cart[k].q<=0)cart.splice(k,1);save();count();openCart()}
+  if(t.id==='pay'){
+    const n=$('cn').value.trim(),p=$('cp').value.trim(),a=$('ca').value.trim(),em=$('ce').value.trim();
+    if(!n||!p||!a||!/^\S+@\S+\.\S+$/.test(em)){alert('Please fill in your name, phone, a valid email and delivery address.');return}
+    if(typeof PaystackPop==='undefined'){alert('Paystack could not load. Check your internet connection.');return}
+    if(PAYSTACK_KEY.includes('PASTE')){alert('The shop’s Paystack key has not been set yet.');return}
+    const items=cart.map(i=>`${i.q} x ${find(i.id).n} (${i.col}, ${i.size})`).join('; '),amt=total();
+    new PaystackPop().newTransaction({
+      key:PAYSTACK_KEY,email:em,amount:Math.round(amt*100),currency:'GHS',
+      metadata:{custom_fields:[{display_name:'Customer',variable_name:'customer',value:n},{display_name:'Phone',variable_name:'phone',value:p},{display_name:'Delivery',variable_name:'delivery',value:a},{display_name:'Items',variable_name:'items',value:items}]},
+      onSuccess:tx=>paid(tx.reference||tx.trxref||'',n,p,a,items,amt),
+      onCancel:()=>{},
+      onError:err=>alert('Payment error: '+(err&&err.message?err.message:'please try again'))
+    });
+  }
+  if(t.id==='order'){
+    const n=$('cn').value.trim(),p=$('cp').value.trim(),a=$('ca').value.trim();
+    if(!n||!p||!a){alert('Please fill in your name, phone and delivery address.');return}
+    if(WA.startsWith('233000')){alert('The shop’s WhatsApp number has not been set yet.');return}
+    const lines=cart.map(i=>{const x=find(i.id);return `${i.q} x ${x.n} (${i.col}, ${i.size}) - ${fmt(x.p*i.q)}`}).join('\n');
+    const msg=`New order from ${STORE}\n\n${lines}\n\nTotal: ${fmt(total())}\n\nName: ${n}\nPhone: ${p}\nDelivery: ${a}`;
+    window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(msg),'_blank');
+  }
+};
+chips();grid();count();
+</script>
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {getFirestore,collection,doc,addDoc,setDoc,deleteDoc,onSnapshot} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import {getAuth,signInWithEmailAndPassword,signOut,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+const cfg={apiKey:"AIzaSyCELryBMSABy_sKK7VK3B7U-KzU9SxZyno",authDomain:"kukz-klothings.firebaseapp.com",projectId:"kukz-klothings",storageBucket:"kukz-klothings.firebasestorage.app",messagingSenderId:"822522863579",appId:"1:822522863579:web:3d563aac0f9b2e7050d1fe"};
+const app=initializeApp(cfg),db=getFirestore(app),auth=getAuth(app);
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const DEF=['#d8c3a5','#9c7a54'];
+let list=[],user=null,editing=null,view='list',err='',img=null;
+
+onSnapshot(collection(db,'products'),s=>{
+  list=s.docs.map(d=>{const x=d.data();return{id:d.id,n:x.n||'',c:x.c||'Other',p:Number(x.p)||0,col:(x.col&&x.col.length)?x.col:['Standard'],s:(x.s&&x.s.length)?x.s:['One size'],g:DEF,d:x.d||'',img:x.img||'',out:!!x.out,t:x.t||0}}).sort((a,b)=>b.t-a.t);
+  window.setProducts(list);
+  if(view!=='form')renderAdmin();
+},()=>window.setProducts([]));
+
+const sync=()=>{const on=location.hash==='#admin';$('admin').classList.toggle('on',on);if(on)renderAdmin()};
+addEventListener('hashchange',sync);
+onAuthStateChanged(auth,u=>{user=u;view='list';renderAdmin()});
+
+function shrink(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,700/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);res(c.toDataURL('image/jpeg',.65))};im.onerror=rej;im.src=r.result};r.onerror=rej;r.readAsDataURL(file)})}
+
+function renderAdmin(){
+  const b=$('abody');if(!$('admin').classList.contains('on'))return;
+  if(!user){
+    b.innerHTML=`<button class="x" data-a="close">×</button><h2>Staff login</h2><p style="color:var(--mut);margin:6px 0 14px">Only the shop owner can manage products.</p><label>Email</label><input id="ae" type="email" autocomplete="email"><label>Password</label><input id="ap" type="password" autocomplete="current-password"><p style="color:var(--acc);font-size:13px">${esc(err)}</p><button class="btn full" data-a="login">Sign in</button>`;return;
+  }
+  if(view==='form'){
+    const x=editing||{n:'',c:'Women',p:'',col:[],s:[],d:'',out:false};
+    const cats=[...new Set(['Women','Men','Kids',...list.map(p=>p.c)])];
+    b.innerHTML=`<button class="x" data-a="close">×</button><h2>${editing?'Edit product':'Add product'}</h2>
+    <label>Photo</label><div id="prev" style="height:170px;border-radius:12px;margin:4px 0 8px;background:${img?"url('"+img+"') center/cover":'#e9dfd2'}"></div><input id="f-img" type="file" accept="image/*">
+    <label>Name</label><input id="f-n" value="${esc(x.n)}">
+    <label>Category</label><input id="f-c" list="cats" value="${esc(x.c)}"><datalist id="cats">${cats.map(c=>`<option value="${esc(c)}">`).join('')}</datalist>
+    <label>Price (GH₵)</label><input id="f-p" type="number" min="0" step="0.01" value="${esc(x.p)}">
+    <label>Colours (separate with commas)</label><input id="f-col" value="${esc(x.col.join(', '))}" placeholder="Black, Red">
+    <label>Sizes (separate with commas)</label><input id="f-s" value="${esc(x.s.join(', '))}" placeholder="S, M, L, XL">
+    <label>Description</label><textarea id="f-d" rows="3">${esc(x.d)}</textarea>
+    <label style="display:block;margin-bottom:12px;font-size:15px;color:var(--ink)"><input type="checkbox" id="f-in" ${x.out?'':'checked'} style="width:auto;margin-right:8px">In stock</label>
+    <button class="btn full" data-a="save">Save product</button><button class="o full" style="margin-top:8px;text-align:center" data-a="cancel">Cancel</button>`;return;
+  }
+  const rows=list.map(x=>`<div class="row"><div class="sw" style="background:${x.img?"url('"+x.img+"') center/cover":'linear-gradient(155deg,'+DEF[0]+','+DEF[1]+')'}"></div><div class="t"><b>${esc(x.n)}</b>${x.out?' <small>(sold out)</small>':''}<br><small>${esc(x.c)} · GH₵${x.p.toFixed(2)}</small><br><span style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap"><button class="o" data-a="edit" data-id="${x.id}">Edit</button><button class="o" data-a="stock" data-id="${x.id}">${x.out?'Mark in stock':'Mark sold out'}</button><button class="o" data-a="del" data-id="${x.id}">Delete</button></span></div></div>`).join('');
+  b.innerHTML=`<button class="x" data-a="close">×</button><h2>Manage products</h2><div style="display:flex;gap:8px;margin:12px 0"><button class="btn" data-a="new">+ Add product</button><button class="o" data-a="out">Sign out</button></div>${rows||'<p style="color:var(--mut)">No products yet. Tap “Add product” to start.</p>'}`;
+}
+
+$('abody').onclick=async e=>{
+  const t=e.target.closest('[data-a]');if(!t)return;
+  const a=t.dataset.a,id=t.dataset.id,x=list.find(p=>p.id===id);
+  if(a==='close'){location.hash='';return}
+  if(a==='login'){
+    err='';
+    try{await signInWithEmailAndPassword(auth,$('ae').value.trim(),$('ap').value)}catch(ex){err='Wrong email or password.';renderAdmin()}
+    return;
+  }
+  if(a==='out'){await signOut(auth);return}
+  if(a==='new'){editing=null;img=null;view='form';renderAdmin();return}
+  if(a==='edit'){editing=x;img=x.img||null;view='form';renderAdmin();return}
+  if(a==='cancel'){view='list';editing=null;img=null;renderAdmin();return}
+  try{
+    if(a==='stock'){await setDoc(doc(db,'products',id),{out:!x.out},{merge:true})}
+    if(a==='del'&&confirm('Delete “'+x.n+'”? This cannot be undone.')){await deleteDoc(doc(db,'products',id))}
+    if(a==='save'){
+      const n=$('f-n').value.trim(),p=parseFloat($('f-p').value);
+      if(!n||!(p>0)){alert('Please enter a name and a price.');return}
+      const sp=v=>v.split(',').map(z=>z.trim()).filter(Boolean);
+      const data={n,c:$('f-c').value.trim()||'Other',p,col:sp($('f-col').value),s:sp($('f-s').value),d:$('f-d').value.trim(),img:img||'',out:!$('f-in').checked,t:editing?editing.t:Date.now()};
+      if(editing)await setDoc(doc(db,'products',editing.id),data);else await addDoc(collection(db,'products'),data);
+      view='list';editing=null;img=null;renderAdmin();
+    }
+  }catch(ex){alert(ex&&ex.code==='permission-denied'?'This account is not allowed to change products.':'Something went wrong. Check your internet and try again.')}
+};
+$('abody').onchange=async e=>{
+  if(e.target.id==='f-img'&&e.target.files[0]){
+    try{img=await shrink(e.target.files[0]);$('prev').style.background="url('"+img+"') center/cover"}catch(ex){alert('Could not read that photo.')}
+  }
+};
+sync();
+</script>
+</body>
+</html>
