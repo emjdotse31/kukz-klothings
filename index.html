@@ -37,16 +37,16 @@ header{position:sticky;top:0;z-index:30;background:rgba(30,21,59,0.95);backdrop-
 #cartBtn:hover{transform:translateY(-1px);background:#f2a71d}
 .kente{height:6px;background:repeating-linear-gradient(90deg,var(--gold) 0 24px,var(--acc) 24px 42px,var(--leaf) 42px 66px,var(--acc2) 66px 84px,#fff 84px 92px,var(--acc2) 92px 110px)}
 
-/* Hero Section - Balanced & Refined */
-.hero{background:linear-gradient(135deg,var(--acc2) 0%, #2e2159 100%);color:#fff;padding:48px 20px 52px;position:relative;overflow:hidden;text-align:center}
-.hero::after{content:'';position:absolute;bottom:-30px;right:-30px;width:200px;height:200px;background:radial-gradient(circle,rgba(223,155,27,0.15) 0%,transparent 70%);border-radius:50%;z-index:1}
+/* Hero Section - compact */
+.hero{background:linear-gradient(135deg,var(--acc2) 0%, #2e2159 100%);color:#fff;padding:26px 20px 28px;position:relative;overflow:hidden;text-align:center}
+.hero::after{content:'';position:absolute;bottom:-30px;right:-30px;width:160px;height:160px;background:radial-gradient(circle,rgba(223,155,27,0.15) 0%,transparent 70%);border-radius:50%;z-index:1}
 .hero .in{max-width:800px;margin:auto;position:relative;z-index:2}
-.hero h2{font-size:clamp(32px, 6vw, 48px);line-height:1.2;margin-bottom:12px;font-weight:700}
-.hero p{color:#e2dff0;max-width:34ch;margin:0 auto 24px;font-size:16px;font-weight:400}
-.cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.hero h2{font-size:clamp(24px, 5vw, 34px);line-height:1.2;margin-bottom:8px;font-weight:700}
+.hero p{color:#e2dff0;max-width:42ch;margin:0 auto 16px;font-size:14px;font-weight:400;line-height:1.5}
+.cta{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
 .btn{display:inline-flex;align-items:center;justify-content:center;background:var(--acc);color:#fff;padding:12px 24px;border-radius:99px;font-weight:700;font-size:14px;text-decoration:none;box-shadow:0 4px 16px rgba(184,35,84,0.3);transition:transform .2s,background .2s}
 .btn:hover{transform:translateY(-2px);background:var(--acc-hover)}
-.hero .btn{background:var(--gold);color:var(--acc2);box-shadow:0 4px 16px rgba(223,155,27,0.3)}
+.hero .btn{background:var(--gold);color:var(--acc2);box-shadow:0 4px 16px rgba(223,155,27,0.3);padding:10px 20px;font-size:13px}
 .hero .btn:hover{background:#f2a71d}
 .btn.ghost{background:rgba(255,255,255,0.08);border:2px solid rgba(255,255,255,0.2);color:#fff;backdrop-filter:blur(4px);box-shadow:none}
 .btn.ghost:hover{background:rgba(255,255,255,0.15);border-color:#fff}
@@ -137,8 +137,8 @@ footer a:hover{text-decoration:underline}
 
 <section class="hero">
   <div class="in">
-    <h2>Colour you can wear</h2>
-    <p>Handcrafted Ankara, Kente, and premium linen styles for women, men, and kids, made to turn heads.</p>
+    <h2>Dress with confidence</h2>
+    <p>Stylish dresses and outfits for women, men and kids. Browse the collection and order in minutes.</p>
     <div class="cta">
       <a class="btn" href="#shop">Shop the collection</a>
       <a class="btn ghost" id="waBtn" href="https://wa.me/233591464095" target="_blank" rel="noopener">Chat on WhatsApp</a>
