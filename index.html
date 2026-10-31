@@ -198,7 +198,20 @@ footer a:hover{text-decoration:underline}
     </div>
     <div class="f-contact">
       <h3 class="serif">Get in Touch</h3>
-      <div class="ct" id="contact"></div>
+      <div class="ct" id="contact">
+        <a href="tel:+233591464095" aria-label="Call Kukz Klothings">
+          <i class="c-call"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></i>
+          <span><small>Call us</small><b>059 146 4095</b></span>
+        </a>
+        <a href="https://wa.me/233591464095" target="_blank" rel="noopener" aria-label="Chat with Kukz Klothings on WhatsApp">
+          <i class="c-wa"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.2-5.2A8.5 8.5 0 1 1 21 11.5z"/><path d="M9.3 8.6c0 3.2 2.600 5.800 5.800 5.800l1.200-1.400-1.900-.9-.9.800a4 4 0 0 1-1.800-1.800l.8-.9-.9-1.900z" fill="currentColor" stroke="none"/></svg></i>
+          <span><small>WhatsApp</small><b>059 146 4095</b></span>
+        </a>
+        <a href="mailto:charityadofo1996@gmail.com" aria-label="Email Kukz Klothings">
+          <i class="c-mail"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></i>
+          <span><small>Email</small><b>charityadofo1996@gmail.com</b></span>
+        </a>
+      </div>
     </div>
   </div>
   <div class="in-f" style="display:block">
@@ -226,11 +239,7 @@ const save=()=>{try{localStorage.setItem('cart',JSON.stringify(cart))}catch(e){}
 const grad=g=>`linear-gradient(135deg,${g[0]},${g[1]})`;
 const find=id=>P.find(x=>x.id===id);
 const bg=x=>x.img?"url('"+x.img+"') center/cover":grad(x.g);
-const IC='width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
-$('contact').innerHTML=
- '<a href="tel:+233591464095"><i class="c-call"><svg '+IC+'><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></i><span><small>Call us</small><b>'+PHONE+'</b></span></a>'+
- '<a href="https://wa.me/'+WA+'" target="_blank" rel="noopener"><i class="c-wa"><svg '+IC+'><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.2-5.2A8.5 8.5 0 1 1 21 11.5z"/><path d="M9.3 8.6c0 3.2 2.600 5.800 5.800 5.800l1.200-1.400-1.900-.9-.9.800a4 4 0 0 1-1.800-1.800l.8-.9-.9-1.900z" fill="currentColor" stroke="none"/></svg></i><span><small>WhatsApp</small><b>'+PHONE+'</b></span></a>'+
- '<a href="mailto:'+EMAIL+'"><i class="c-mail"><svg '+IC+'><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></i><span><small>Email</small><b>'+EMAIL+'</b></span></a>';
+
 
 function showToast(msg){
   const t=$('toast');
@@ -326,15 +335,28 @@ $('waBtn').onclick=e=>{if(!cart.length){e.preventDefault();alert('Your bag is em
 </script>
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {getFirestore,collection,doc,addDoc,setDoc,deleteDoc,onSnapshot} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import {getFirestore,collection,doc,addDoc,setDoc,deleteDoc,onSnapshot,getDocs,query,orderBy,limit} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import {getAuth,signInWithEmailAndPassword,signOut,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 const cfg={apiKey:"AIzaSyCELryBMSABy_sKK7VK3B7U-KzU9SxZyno",authDomain:"kukz-klothings.firebaseapp.com",projectId:"kukz-klothings",storageBucket:"kukz-klothings.firebasestorage.app",messagingSenderId:"822522863579",appId:"1:822522863579:web:3d563aac0f9b2e7050d1fe"};
 const app=initializeApp(cfg),db=getFirestore(app),auth=getAuth(app);
+// Free-plan analytics: direct Firestore writes, no Cloud Functions or App Check setup required.
 const $=id=>document.getElementById(id);
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 const DEF=['#b82354','#1e153b'];
-let list=[],user=null,editing=null,view='list',err='',img=null,orders=[],tab='products',unsubO=null;
+let list=[],user=null,editing=null,view='list',err='',img=null,orders=[],tab='products',unsubO=null,analyticsPeriod='daily',analyticsData=null,analyticsBusy=false,analyticsError='';
 window.saveOrder=o=>addDoc(collection(db,'orders'),o).catch(()=>{});
+
+// Count one visit per browser tab session. A random browser ID estimates unique visitors.
+async function trackWebsiteVisit(){
+  try{
+    let visitorId=localStorage.getItem('kk_visitor_id');
+    if(!visitorId){visitorId=(crypto.randomUUID?crypto.randomUUID():('v-'+Date.now()+'-'+Math.random().toString(36).slice(2)));localStorage.setItem('kk_visitor_id',visitorId)}
+    if(sessionStorage.getItem('kk_visit_recorded'))return;
+    await addDoc(collection(db,'visitorEvents'),{visitorId,createdAt:Date.now()});
+    sessionStorage.setItem('kk_visit_recorded','1');
+  }catch(e){console.warn('Free visitor analytics could not record this visit. Check the visitorEvents Firestore rule and free quota.',e)}
+}
+trackWebsiteVisit();
 
 onSnapshot(collection(db,'products'),s=>{
   list=s.docs.map(d=>{const x=d.data();return{id:d.id,n:x.n||'',c:x.c||'Other',p:Number(x.p)||0,col:(x.col&&x.col.length)?x.col:['Standard'],s:(x.s&&x.s.length)?x.s:['One size'],g:DEF,d:x.d||'',img:x.img||'',out:!!x.out,t:x.t||0}}).sort((a,b)=>b.t-a.t);
@@ -355,7 +377,7 @@ onAuthStateChanged(auth,u=>{
 function shrink(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,700/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);res(c.toDataURL('image/jpeg',.65))};im.onerror=rej;im.src=r.result};r.onerror=rej;r.readAsDataURL(file)})}
 
 const newCount=()=>orders.filter(o=>!o.status||o.status==='new').length;
-const tabs=()=>`<div style="display:flex;gap:8px;margin:14px 0"><button class="o${tab==='products'?' on':''}" data-a="tab" data-v="products">Products</button><button class="o${tab==='orders'?' on':''}" data-a="tab" data-v="orders">Orders ${newCount()?'('+newCount()+')':''}</button></div>`;
+const tabs=()=>`<div style="display:flex;gap:8px;margin:14px 0;flex-wrap:wrap"><button class="o${tab==='products'?' on':''}" data-a="tab" data-v="products">Products</button><button class="o${tab==='orders'?' on':''}" data-a="tab" data-v="orders">Orders ${newCount()?'('+newCount()+')':''}</button><button class="o${tab==='analytics'?' on':''}" data-a="tab" data-v="analytics">Website Visitors</button></div>`;
 function ordersView(){
   const rows=orders.map(o=>{
     const items=(o.items||[]).map(i=>`${i.q} x ${esc(i.n)} (${esc(i.col)}, ${esc(i.size)})`).join('<br>');
@@ -365,10 +387,58 @@ function ordersView(){
     return `<div style="border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:10px;background:#fff"><div style="display:flex;justify-content:space-between;gap:8px"><b>${esc(o.name)}</b><span style="font-size:11px;color:var(--mut)">${d}</span></div><div style="font-size:13px;margin:6px 0">${items}</div><div style="font-weight:800;color:var(--acc)">GH₵${Number(o.total||0).toFixed(2)} <small style="color:var(--mut);font-weight:400">· ${o.method==='paystack'?'Paystack':'WhatsApp'}${o.ref?' · Ref '+esc(o.ref):''}</small></div><div style="font-size:13px;margin:6px 0">${esc(o.phone)}${o.email?' · '+esc(o.email):''}<br>${esc(o.address)}</div><div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:8px"><span class="o on" style="padding:3px 8px;font-size:12px">${stat}</span><button class="o" data-a="ostat" data-id="${o.id}" data-s="paid" style="font-size:12px;padding:4px 10px">Mark Paid</button><button class="o" data-a="ostat" data-id="${o.id}" data-s="delivered" style="font-size:12px;padding:4px 10px">Delivered</button><a class="o" style="text-decoration:none;font-size:12px;padding:4px 10px" href="tel:${esc(o.phone)}">Call</a><a class="o" style="text-decoration:none;font-size:12px;padding:4px 10px" target="_blank" href="https://wa.me/${wa}">WhatsApp</a><button class="o" data-a="odel" data-id="${o.id}" style="color:var(--acc);font-size:12px;padding:4px 10px">Delete</button></div></div>`}).join('');
   return `<button class="x" data-a="close">×</button>${tabs()}<h2>Customer Orders</h2><div style="margin:10px 0"><button class="o" data-a="out">Sign Out</button></div>${rows||'<p style="color:var(--mut)">No orders received yet.</p>'}`;
 }
+function analyticsDateLabel(key,period){
+  if(period==='yearly')return key;
+  if(period==='monthly'){const [y,m]=key.split('-');return new Date(Number(y),Number(m)-1,1).toLocaleDateString('en',{month:'short',year:'2-digit'})}
+  if(period==='weekly')return 'Wk '+key.slice(-2)+' '+key.slice(0,4);
+  return new Date(key+'T00:00:00Z').toLocaleDateString('en',{day:'numeric',month:'short'});
+}
+function visitorChart(rows,period){
+  const data=[...(rows||[])].slice().reverse();
+  if(!data.length)return '<p style="color:var(--mut);padding:20px 0">No visitor history recorded yet. New visits will appear here after analytics is configured.</p>';
+  const w=680,h=210,pad=32,max=Math.max(1,...data.map(x=>Number(x.totalVisits)||0));
+  const pts=data.map((x,i)=>{const xx=pad+(data.length===1?(w-2*pad)/2:i*(w-2*pad)/(data.length-1));const yy=h-pad-(Number(x.totalVisits)||0)/max*(h-2*pad);return [xx,yy]});
+  const poly=pts.map(a=>a.join(',')).join(' ');
+  const labels=data.map((x,i)=>i===0||i===data.length-1||i%Math.ceil(data.length/5)===0?`<text x="${pts[i][0]}" y="${h-8}" text-anchor="middle" font-size="10" fill="#706b82">${esc(analyticsDateLabel(x.key,period))}</text>`:'').join('');
+  const circles=pts.map((a,i)=>`<circle cx="${a[0]}" cy="${a[1]}" r="3.5" fill="#b82354"><title>${esc(analyticsDateLabel(data[i].key,period))}: ${Number(data[i].totalVisits)||0} visits</title></circle>`).join('');
+  return `<div style="overflow-x:auto"><svg viewBox="0 0 ${w} ${h}" role="img" aria-label="Website visits chart" style="width:100%;min-width:320px;height:auto"><line x1="${pad}" y1="${h-pad}" x2="${w-pad}" y2="${h-pad}" stroke="#ede7f2"/><line x1="${pad}" y1="${pad}" x2="${w-pad}" y2="${pad}" stroke="#ede7f2"/><polyline points="${poly}" fill="none" stroke="#b82354" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>${circles}${labels}</svg></div>`;
+}
+function localDayKey(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function isoWeekKey(d){const x=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));x.setUTCDate(x.getUTCDate()+4-(x.getUTCDay()||7));const y=x.getUTCFullYear(),yearStart=new Date(Date.UTC(y,0,1)),week=Math.ceil((((x-yearStart)/86400000)+1)/7);return y+'-W'+String(week).padStart(2,'0')}
+function bucketKey(d,period){if(period==='yearly')return String(d.getFullYear());if(period==='monthly')return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');if(period==='weekly')return isoWeekKey(d);return localDayKey(d)}
+async function loadAnalytics(){
+  analyticsBusy=true;analyticsError='';analyticsData=null;renderAdmin();
+  try{
+    const q=query(collection(db,'visitorEvents'),orderBy('createdAt','desc'),limit(5000));
+    const snap=await getDocs(q);
+    const events=snap.docs.map(x=>x.data()).filter(x=>typeof x.createdAt==='number'&&typeof x.visitorId==='string');
+    analyticsData={events,limited:events.length===5000};
+  }catch(e){analyticsError=e?.message||'Could not load visitor analytics. Check Firestore rules and your Firebase free quota.';analyticsData=null;}
+  analyticsBusy=false;renderAdmin();
+}
+function buildAnalytics(){
+  const events=analyticsData?.events||[],now=new Date(),today=localDayKey(now),week=isoWeekKey(now),month=today.slice(0,7),year=String(now.getFullYear());
+  const unique=arr=>new Set(arr.map(x=>x.visitorId)).size;
+  const summary={today:{totalVisits:0},week:{totalVisits:0},month:{totalVisits:0},year:{totalVisits:0},allTime:{totalVisits:events.length,uniqueVisitors:unique(events)}};
+  const buckets=new Map();
+  for(const e of events){const d=new Date(e.createdAt),day=localDayKey(d),wk=isoWeekKey(d),mo=day.slice(0,7),yr=String(d.getFullYear());if(day===today)summary.today.totalVisits++;if(wk===week)summary.week.totalVisits++;if(mo===month)summary.month.totalVisits++;if(yr===year)summary.year.totalVisits++;const key=bucketKey(d,analyticsPeriod);if(!buckets.has(key))buckets.set(key,[]);buckets.get(key).push(e)}
+  const nowDate=new Date();let keys=[];
+  if(analyticsPeriod==='daily'){for(let i=29;i>=0;i--){const d=new Date(nowDate.getFullYear(),nowDate.getMonth(),nowDate.getDate()-i);keys.push(localDayKey(d))}}
+  else if(analyticsPeriod==='weekly'){for(let i=11;i>=0;i--){const d=new Date(nowDate.getFullYear(),nowDate.getMonth(),nowDate.getDate()-i*7);keys.push(isoWeekKey(d))}}
+  else if(analyticsPeriod==='monthly'){for(let i=11;i>=0;i--){const d=new Date(nowDate.getFullYear(),nowDate.getMonth()-i,1);keys.push(d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0'))}}
+  else {for(let i=4;i>=0;i--)keys.push(String(nowDate.getFullYear()-i))}
+  const history=keys.map(key=>{const arr=buckets.get(key)||[];return{key,totalVisits:arr.length,uniqueVisitors:unique(arr)}});
+  return{summary,history,limited:!!analyticsData?.limited};
+}
+function analyticsView(){
+  const d=analyticsData?buildAnalytics():{},summary=d.summary||{},rows=d.history||[];
+  const card=(label,value)=>`<div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px"><small style="color:var(--mut);display:block">${label}</small><b style="font-size:25px;color:var(--acc2)">${Number(value||0).toLocaleString()}</b></div>`;
+  return `<button class="x" data-a="close">×</button>${tabs()}<h2>Website Visitor Analytics</h2><p style="color:var(--mut);font-size:13px;margin:5px 0 14px">Free visitor tracking stores a random browser ID and visit time in Firestore. Counts are estimates, not verified people.</p><div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:14px 0">${card("Today",summary.today?.totalVisits)}${card("This week",summary.week?.totalVisits)}${card("This month",summary.month?.totalVisits)}${card("This year",summary.year?.totalVisits)}${card("Recorded visits (up to 5,000)",summary.allTime?.totalVisits)}${card("All-time unique visitors",summary.allTime?.uniqueVisitors)}</div><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:18px 0 10px"><label style="margin:0">History</label><select id="analytics-period" style="width:auto;margin:0;padding:8px 10px;border:1px solid var(--line);border-radius:9px;background:#fff"><option value="daily" ${analyticsPeriod==='daily'?'selected':''}>Daily · last 30 days</option><option value="weekly" ${analyticsPeriod==='weekly'?'selected':''}>Weekly · last 12 weeks</option><option value="monthly" ${analyticsPeriod==='monthly'?'selected':''}>Monthly · last 12 months</option><option value="yearly" ${analyticsPeriod==='yearly'?'selected':''}>Yearly · last 5 years</option></select><button class="o" data-a="arefresh">Refresh</button></div><div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:12px"><b style="display:block;margin-bottom:8px">Total visits over time</b>${analyticsBusy?'<p style="color:var(--mut)">Loading visitor records…</p>':visitorChart(rows,analyticsPeriod)}</div>${analyticsError?`<p style="color:var(--acc);font-size:13px;margin:10px 0">${esc(analyticsError)}</p>`:''}${d.limited?'<p style="font-size:11px;color:var(--mut)">Showing the latest 5,000 visit records to limit Firestore reads. Older records are not included in these totals.</p>':''}<h3 style="font-size:18px;margin:14px 0 8px">Historical records</h3><div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:12px"><thead><tr><th style="text-align:left;padding:9px;border-bottom:1px solid var(--line)">Period</th><th style="text-align:right;padding:9px;border-bottom:1px solid var(--line)">Visits</th><th style="text-align:right;padding:9px;border-bottom:1px solid var(--line)">Unique</th></tr></thead><tbody>${rows.length?rows.map(r=>`<tr><td style="padding:9px;border-bottom:1px solid var(--line)">${esc(analyticsDateLabel(r.key,analyticsPeriod))}</td><td style="padding:9px;text-align:right;border-bottom:1px solid var(--line)">${Number(r.totalVisits||0).toLocaleString()}</td><td style="padding:9px;text-align:right;border-bottom:1px solid var(--line)">${Number(r.uniqueVisitors||0).toLocaleString()}</td></tr>`).join(''):'<tr><td colspan="3" style="padding:14px;color:var(--mut)">No history available yet.</td></tr>'}</tbody></table></div><p style="font-size:11px;color:var(--mut);margin-top:12px">Unique visitors are estimated using a random browser ID stored on the visitor’s device. Clearing browser storage or using another device can count the same person as new. Counts can be affected by browser privacy settings and automated traffic.</p><div style="margin-top:14px"><button class="o" data-a="out">Sign Out</button></div>`;
+}
 function renderAdmin(){
   const b=$('abody');if(!$('admin').classList.contains('on'))return;
   if(!user){
-    b.innerHTML=`<button class="x" data-a="close">×</button><h2 style="font-size:22px;margin-bottom:6px">Staff Portal Login</h2><p style="color:var(--mut);margin-bottom:16px;font-size:13px">Sign in to manage inventory and view customer orders.</p><label>Email Address</label><input id="ae" type="email" autocomplete="email"><label>Password</label><input id="ap" type="password" autocomplete="current-password"><p style="color:var(--acc);font-size:12px;margin-bottom:10px">${esc(err)}</p><button class="btn full" data-a="login">Sign In</button>`;return;
+    b.innerHTML=`<button class="x" data-a="close">×</button><h2 style="font-size:22px;margin-bottom:6px">Staff Portal Login</h2><p style="color:var(--mut);margin-bottom:16px;font-size:13px">Sign in to manage inventory, customer orders and website visitor analytics.</p><label>Email Address</label><input id="ae" type="email" autocomplete="email"><label>Password</label><input id="ap" type="password" autocomplete="current-password"><p style="color:var(--acc);font-size:12px;margin-bottom:10px">${esc(err)}</p><button class="btn full" data-a="login">Sign In</button>`;return;
   }
   if(view==='form'){
     const x=editing||{n:'',c:'Women',p:'',col:[],s:[],d:'',out:false};
@@ -385,6 +455,7 @@ function renderAdmin(){
     <button class="btn full" data-a="save">Save Product</button><button class="o full" style="margin-top:6px;text-align:center" data-a="cancel">Cancel</button>`;return;
   }
   if(tab==='orders'){b.innerHTML=ordersView();return}
+  if(tab==='analytics'){b.innerHTML=analyticsView();return}
   const rows=list.map(x=>`<div class="row"><div class="sw" style="background:${x.img?"url('"+x.img+"') center/cover":'linear-gradient(135deg,'+DEF[0]+','+DEF[1]+')'}"></div><div class="t"><b>${esc(x.n)}</b>${x.out?' <small style="color:var(--acc)">(Sold out)</small>':''}<br><small>${esc(x.c)} · GH₵${x.p.toFixed(2)}</small><br><span style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap"><button class="o" data-a="edit" data-id="${x.id}" style="font-size:12px;padding:4px 10px">Edit</button><button class="o" data-a="stock" data-id="${x.id}" style="font-size:12px;padding:4px 10px">${x.out?'Set In Stock':'Mark Sold Out'}</button><button class="o" data-a="del" data-id="${x.id}" style="color:var(--acc);font-size:12px;padding:4px 10px">Delete</button></span></div></div>`).join('');
   b.innerHTML=`<button class="x" data-a="close">×</button>${tabs()}<h2>Manage Inventory</h2><div style="display:flex;gap:8px;margin:14px 0"><button class="btn" data-a="new">+ Add Product</button><button class="o" data-a="out">Sign Out</button></div>${rows||'<p style="color:var(--mut)">No products added yet. Click “+ Add Product” to get started.</p>'}`;
 }
@@ -393,7 +464,8 @@ $('abody').onclick=async e=>{
   const t=e.target.closest('[data-a]');if(!t)return;
   const a=t.dataset.a,id=t.dataset.id,x=list.find(p=>p.id===id);
   if(a==='close'){location.hash='';return}
-  if(a==='tab'){tab=t.dataset.v;renderAdmin();return}
+  if(a==='tab'){tab=t.dataset.v;renderAdmin();if(tab==='analytics')loadAnalytics();return}
+  if(a==='arefresh'){loadAnalytics();return}
   if(a==='login'){
     err='';
     try{await signInWithEmailAndPassword(auth,$('ae').value.trim(),$('ap').value)}catch(ex){err='Incorrect email or password.';renderAdmin()}
@@ -419,6 +491,7 @@ $('abody').onclick=async e=>{
   }catch(ex){alert('An error occurred. Please check your network connection and permissions.')}
 };
 $('abody').onchange=async e=>{
+  if(e.target.id==='analytics-period'){analyticsPeriod=e.target.value;loadAnalytics();return}
   if(e.target.id==='f-img'&&e.target.files[0]){
     try{img=await shrink(e.target.files[0]);$('prev').style.background="url('"+img+"') center/cover"}catch(ex){alert('Could not process photo.')}
   }
