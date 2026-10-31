@@ -31,96 +31,100 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 :focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 
 /* Header & Kente Stripe */
-header{position:sticky;top:0;z-index:30;background:rgba(30,21,59,0.95);backdrop-filter:blur(12px);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:16px 24px;border-bottom:1px solid rgba(255,255,255,0.1)}
-.logo{font-size:24px;font-weight:700;letter-spacing:-.5px}.logo b{color:var(--gold)}
-#cartBtn{background:var(--gold);color:var(--acc2);padding:10px 20px;border-radius:99px;font-size:14px;font-weight:800;display:flex;align-items:center;gap:8px;box-shadow:0 4px 14px rgba(223,155,27,0.3);transition:transform .2s,background .2s}
+header{position:sticky;top:0;z-index:30;background:rgba(30,21,59,0.95);backdrop-filter:blur(12px);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:14px 24px;border-bottom:1px solid rgba(255,255,255,0.1)}
+.logo{font-size:22px;font-weight:700;letter-spacing:-.5px}.logo b{color:var(--gold)}
+#cartBtn{background:var(--gold);color:var(--acc2);padding:8px 16px;border-radius:99px;font-size:13px;font-weight:800;display:flex;align-items:center;gap:6px;box-shadow:0 4px 14px rgba(223,155,27,0.3);transition:transform .2s,background .2s}
 #cartBtn:hover{transform:translateY(-1px);background:#f2a71d}
-.kente{height:8px;background:repeating-linear-gradient(90deg,var(--gold) 0 24px,var(--acc) 24px 42px,var(--leaf) 42px 66px,var(--acc2) 66px 84px,#fff 84px 92px,var(--acc2) 92px 110px)}
+.kente{height:6px;background:repeating-linear-gradient(90deg,var(--gold) 0 24px,var(--acc) 24px 42px,var(--leaf) 42px 66px,var(--acc2) 66px 84px,#fff 84px 92px,var(--acc2) 92px 110px)}
 
-/* Hero Section */
-.hero{background:linear-gradient(135deg,var(--acc2) 0%, #2e2159 100%);color:#fff;padding:72px 20px 80px;position:relative;overflow:hidden}
-.hero::after{content:'';position:absolute;bottom:-50px;right:-50px;width:300px;height:300px;background:radial-gradient(circle,rgba(223,155,27,0.15) 0%,transparent 70%);border-radius:50%;z-index:1}
-.hero .in{max-width:1100px;margin:auto;position:relative;z-index:2}
-.hero h2{font-size:clamp(38px,8vw,68px);line-height:1.1;max-width:12ch;margin-bottom:20px;font-weight:700}
-.hero p{color:#e2dff0;max-width:38ch;margin-bottom:32px;font-size:18px;font-weight:400}
-.cta{display:flex;gap:14px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;justify-content:center;background:var(--acc);color:#fff;padding:14px 28px;border-radius:99px;font-weight:700;text-decoration:none;box-shadow:0 6px 20px rgba(184,35,84,0.3);transition:transform .2s,background .2s}
+/* Hero Section - Balanced & Refined */
+.hero{background:linear-gradient(135deg,var(--acc2) 0%, #2e2159 100%);color:#fff;padding:48px 20px 52px;position:relative;overflow:hidden;text-align:center}
+.hero::after{content:'';position:absolute;bottom:-30px;right:-30px;width:200px;height:200px;background:radial-gradient(circle,rgba(223,155,27,0.15) 0%,transparent 70%);border-radius:50%;z-index:1}
+.hero .in{max-width:800px;margin:auto;position:relative;z-index:2}
+.hero h2{font-size:clamp(32px, 6vw, 48px);line-height:1.2;margin-bottom:12px;font-weight:700}
+.hero p{color:#e2dff0;max-width:34ch;margin:0 auto 24px;font-size:16px;font-weight:400}
+.cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;background:var(--acc);color:#fff;padding:12px 24px;border-radius:99px;font-weight:700;font-size:14px;text-decoration:none;box-shadow:0 4px 16px rgba(184,35,84,0.3);transition:transform .2s,background .2s}
 .btn:hover{transform:translateY(-2px);background:var(--acc-hover)}
-.hero .btn{background:var(--gold);color:var(--acc2);box-shadow:0 6px 20px rgba(223,155,27,0.3)}
+.hero .btn{background:var(--gold);color:var(--acc2);box-shadow:0 4px 16px rgba(223,155,27,0.3)}
 .hero .btn:hover{background:#f2a71d}
 .btn.ghost{background:rgba(255,255,255,0.08);border:2px solid rgba(255,255,255,0.2);color:#fff;backdrop-filter:blur(4px);box-shadow:none}
 .btn.ghost:hover{background:rgba(255,255,255,0.15);border-color:#fff}
 
 /* Trust Facts Bar */
 .facts-wrapper{background:var(--surface);border-bottom:1px solid var(--line)}
-.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1100px;margin:auto;padding:24px 20px;text-align:center;font-size:14px;color:var(--mut)}
-.facts div{display:flex;flex-direction:column;gap:4px;border-right:1px solid var(--line)}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:1000px;margin:auto;padding:18px 20px;text-align:center;font-size:13px;color:var(--mut)}
+.facts div{display:flex;flex-direction:column;gap:2px;border-right:1px solid var(--line)}
 .facts div:last-child{border-right:0}
-.facts b{color:var(--ink);font-size:15px;font-weight:700}
+.facts b{color:var(--ink);font-size:14px;font-weight:700}
 
 /* Section & Filters */
-.sec-header{max-width:1100px;margin:40px auto 0;padding:0 20px;display:flex;justify-content:space-between;align-items:flex-end}
-.sec{font-size:32px;font-weight:700;color:var(--ink)}
-.chips{display:flex;gap:10px;padding:16px 20px 8px;overflow-x:auto;max-width:1100px;margin:auto;scrollbar-width:none}
+.sec-header{max-width:1100px;margin:32px auto 0;padding:0 20px;display:flex;justify-content:space-between;align-items:flex-end}
+.sec{font-size:26px;font-weight:700;color:var(--ink)}
+.chips{display:flex;gap:8px;padding:14px 20px 6px;overflow-x:auto;max-width:1100px;margin:auto;scrollbar-width:none}
 .chips::-webkit-scrollbar{display:none}
-.chip{padding:10px 22px;border:2px solid var(--line);border-radius:99px;background:var(--surface);white-space:nowrap;font-size:14px;font-weight:600;color:var(--mut);transition:all .2s;box-shadow:0 2px 6px rgba(0,0,0,0.02)}
+.chip{padding:8px 18px;border:2px solid var(--line);border-radius:99px;background:var(--surface);white-space:nowrap;font-size:13px;font-weight:600;color:var(--mut);transition:all .2s;box-shadow:0 2px 6px rgba(0,0,0,0.02)}
 .chip:hover{border-color:var(--acc2);color:var(--acc2)}
-.chip.on{background:var(--acc2);color:#fff;border-color:var(--acc2);box-shadow:0 4px 12px rgba(30,21,59,0.2)}
+.chip.on{background:var(--acc2);color:#fff;border-color:var(--acc2);box-shadow:0 4px 10px rgba(30,21,59,0.2)}
 
 /* Product Grid & Cards */
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px 16px;padding:20px 20px 60px;max-width:1100px;margin:auto}
-@media(min-width:700px){.grid{grid-template-columns:repeat(3,1fr);gap:30px 20px}}
-@media(min-width:1000px){.grid{grid-template-columns:repeat(4,1fr);gap:30px 24px}}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px 14px;padding:16px 20px 50px;max-width:1100px;margin:auto}
+@media(min-width:700px){.grid{grid-template-columns:repeat(3,1fr);gap:24px 18px}}
+@media(min-width:1000px){.grid{grid-template-columns:repeat(4,1fr);gap:24px 20px}}
 
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);text-align:left;display:flex;flex-direction:column;overflow:hidden;transition:transform .25s,box-shadow .25s;box-shadow:var(--shadow)}
-.card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:transparent}
-.ph{aspect-ratio:3/4;display:flex;align-items:flex-end;padding:16px;color:#fff;font-family:"Playfair Display",serif;font-weight:700;font-size:18px;text-shadow:0 2px 10px rgba(0,0,0,0.5);position:relative;background-size:cover;background-position:center}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:transparent}
+.ph{aspect-ratio:3/4;display:flex;align-items:flex-end;padding:14px;color:#fff;font-family:"Playfair Display",serif;font-weight:700;font-size:16px;text-shadow:0 2px 8px rgba(0,0,0,0.5);position:relative;background-size:cover;background-position:center}
 .ph::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.4) 0%,transparent 60%)}
-.card .in{padding:16px;display:flex;flex-direction:column;flex:1;justify-content:space-between}
-.card h3{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.3}
+.card .in{padding:14px;display:flex;flex-direction:column;flex:1;justify-content:space-between}
+.card h3{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px;line-height:1.3}
 .card-meta{display:flex;justify-content:space-between;align-items:center;margin-top:auto}
-.card .pr{display:inline-block;color:var(--acc);font-weight:800;font-size:16px}
-.card small{color:var(--mut);font-weight:500;font-size:13px}
+.card .pr{display:inline-block;color:var(--acc);font-weight:800;font-size:15px}
+.card small{color:var(--mut);font-weight:500;font-size:12px}
 
 /* Overlays, Modals & Drawers */
 .ov{position:fixed;inset:0;background:rgba(24,20,31,0.6);backdrop-filter:blur(6px);z-index:50;display:none;opacity:0;transition:opacity .3s}
 .ov.on{display:flex;opacity:1}
 .sheet{position:absolute;background:var(--surface);padding:24px 24px calc(24px + env(safe-area-inset-bottom,0));overflow:auto;box-shadow:var(--shadow-lg)}
 #modal .sheet{left:0;right:0;bottom:0;max-height:92vh;border-radius:28px 28px 0 0;animation:slideUp .3s ease}
-@media(min-width:700px){#modal .sheet{left:50%;top:50%;bottom:auto;right:auto;transform:translate(-50%,-50%);width:480px;border-radius:24px}}
-#drawer .sheet{top:0;bottom:0;right:0;width:min(100%,420px);height:100%;animation:slideLeft .3s ease}
+@media(min-width:700px){#modal .sheet{left:50%;top:50%;bottom:auto;right:auto;transform:translate(-50%,-50%);width:460px;border-radius:24px}}
+#drawer .sheet{top:0;bottom:0;right:0;width:min(100%,400px);height:100%;animation:slideLeft .3s ease}
 @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
 @keyframes slideLeft{from{transform:translateX(100%)}to{transform:translateX(0)}}
 
-.x{float:right;font-size:24px;line-height:1;padding:8px;color:var(--mut);background:var(--bg);border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s}
+.x{float:right;font-size:22px;line-height:1;padding:6px;color:var(--mut);background:var(--bg);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s}
 .x:hover{background:var(--line);color:var(--ink)}
 
 /* Options & Form Controls */
-.opt{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 18px}
-.o{padding:8px 16px;border:2px solid var(--line);border-radius:99px;background:#fff;font-size:14px;font-weight:600;color:var(--mut);cursor:pointer;transition:all .2s}
+.opt{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 16px}
+.o{padding:7px 14px;border:2px solid var(--line);border-radius:99px;background:#fff;font-size:13px;font-weight:600;color:var(--mut);cursor:pointer;transition:all .2s}
 .o.on{border-color:var(--acc2);background:var(--acc2);color:#fff}
-label{font-size:13px;font-weight:700;color:var(--mut);display:block;margin-bottom:6px}
-input,textarea{width:100%;padding:12px 16px;border:2px solid var(--line);border-radius:12px;font:inherit;background:var(--bg);margin-bottom:16px;color:var(--ink);transition:border-color .2s}
+label{font-size:12px;font-weight:700;color:var(--mut);display:block;margin-bottom:4px}
+input,textarea{width:100%;padding:10px 14px;border:2px solid var(--line);border-radius:10px;font:inherit;background:var(--bg);margin-bottom:14px;color:var(--ink);transition:border-color .2s}
 input:focus,textarea:focus{border-color:var(--acc2);outline:0;background:#fff}
 
-.row{display:flex;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
-.row .sw{width:56px;height:70px;border-radius:10px;flex:none;background-size:cover;background-position:center}
-.row .t{flex:1;font-size:14px}
+.row{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.row .sw{width:50px;height:62px;border-radius:8px;flex:none;background-size:cover;background-position:center}
+.row .t{flex:1;font-size:13px}
 .q{display:flex;align-items:center;gap:8px}
-.q button{width:30px;height:30px;border-radius:50%;border:2px solid var(--line);background:#fff;font-weight:bold;display:flex;align-items:center;justify-content:center;transition:border-color .2s}
+.q button{width:28px;height:28px;border-radius:50%;border:2px solid var(--line);background:#fff;font-weight:bold;display:flex;align-items:center;justify-content:center;transition:border-color .2s}
 .q button:hover{border-color:var(--acc2)}
 
-.tot{display:flex;justify-content:space-between;font-size:20px;font-weight:800;margin:20px 0;color:var(--ink);padding-top:10px;border-top:2px dashed var(--line)}
-.full{width:100%;text-align:center;margin-top:8px}
+.tot{display:flex;justify-content:space-between;font-size:18px;font-weight:800;margin:16px 0;color:var(--ink);padding-top:10px;border-top:2px dashed var(--line)}
+.full{width:100%;text-align:center;margin-top:6px}
+
+/* Toast Notification for Add to Cart */
+#toast {position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--acc2); color: #fff; padding: 12px 24px; border-radius: 99px; font-weight: 700; font-size: 14px; box-shadow: var(--shadow-lg); transition: transform 0.3s ease; z-index: 100; display: flex; align-items: center; gap: 8px;}
+#toast.show {transform: translateX(-50%) translateY(0);}
 
 /* Footer */
-footer{background:var(--acc2);color:#d2cbe6;padding:48px 20px calc(48px + env(safe-area-inset-bottom,0));font-size:14px;line-height:1.8}
-footer .in-f{max-width:1100px;margin:auto;display:grid;grid-template-columns:1fr;gap:24px}
+footer{background:var(--acc2);color:#d2cbe6;padding:40px 20px calc(40px + env(safe-area-inset-bottom,0));font-size:13px;line-height:1.7}
+footer .in-f{max-width:1100px;margin:auto;display:grid;grid-template-columns:1fr;gap:20px}
 @media(min-width:700px){footer .in-f{grid-template-columns:2fr 1fr}}
-footer h3{color:#fff;margin-bottom:10px;font-size:24px}
+footer h3{color:#fff;margin-bottom:8px;font-size:20px}
 footer a{color:var(--gold);text-decoration:none;font-weight:600}
 footer a:hover{text-decoration:underline}
-.footer-bottom{margin-top:32px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;opacity:0.7;font-size:13px}
+.footer-bottom{margin-top:24px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;opacity:0.7;font-size:12px}
 </style>
 <script src="https://js.paystack.co/v2/inline.js"></script>
 </head>
@@ -163,10 +167,10 @@ footer a:hover{text-decoration:underline}
     <div>
       <h3 class="serif">Kukz Klothings</h3>
       <p>Order seamlessly online, we confirm your selections on WhatsApp, and arrange fast delivery right to your door.</p>
-      <p style="margin-top:10px">Pay easily with MTN MoMo, Telecel Cash, AirtelTigo Money, or cash on delivery.</p>
+      <p style="margin-top:8px">Pay easily with MTN MoMo, Telecel Cash, AirtelTigo Money, or cash on delivery.</p>
     </div>
     <div>
-      <h3 style="font-size:18px;margin-bottom:12px">Get in Touch</h3>
+      <h3 style="font-size:16px;margin-bottom:10px">Get in Touch</h3>
       <p id="contact"></p>
     </div>
   </div>
@@ -181,6 +185,7 @@ footer a:hover{text-decoration:underline}
 <div class="ov" id="modal"><div class="sheet" id="mbody"></div></div>
 <div class="ov" id="admin" style="z-index:60"><div class="sheet" id="abody" style="left:0;right:0;top:0;bottom:0"></div></div>
 <div class="ov" id="drawer"><div class="sheet" id="dbody"></div></div>
+<div id="toast">✨ Added to your shopping bag!</div>
 
 <script>
 const STORE='Kukz Klothings', WA='233591464095', PHONE='059 146 4095', EMAIL='charityadofo1996@gmail.com';
@@ -195,6 +200,13 @@ const grad=g=>`linear-gradient(135deg,${g[0]},${g[1]})`;
 const find=id=>P.find(x=>x.id===id);
 const bg=x=>x.img?"url('"+x.img+"') center/cover":grad(x.g);
 $('contact').innerHTML='WhatsApp / Call: '+PHONE+'<br>Email: <a href="mailto:'+EMAIL+'">'+EMAIL+'</a>';
+
+function showToast(msg){
+  const t=$('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2200);
+}
 
 function chips(){
   $('chips').innerHTML=['All',...new Set(P.map(x=>x.c).filter(Boolean))].map(c=>`<button class="chip${c===cat?' on':''}" data-c="${c}">${c}</button>`).join('');
@@ -211,7 +223,7 @@ let sel={};
 function openProduct(id){
   const x=find(id);sel={id,col:x.col[0],size:x.s[0]};
   const opts=(arr,k)=>arr.map(v=>`<button class="o${sel[k]===v?' on':''}" data-k="${k}" data-v="${v}">${v}</button>`).join('');
-  $('mbody').innerHTML=`<button class="x" data-close="modal">×</button><div class="ph" style="background:${bg(x)};aspect-ratio:16/9;border-radius:12px;margin-bottom:16px">${x.img?'':x.n}</div><h2 style="font-size:24px;margin-bottom:4px">${x.n}</h2><div class="pr" style="color:var(--acc);font-weight:800;font-size:20px;margin-bottom:12px">${fmt(x.p)}</div><p style="color:var(--mut);margin-bottom:16px;font-size:14px">${x.d||'No description provided.'}</p><label>Select Colour</label><div class="opt">${opts(x.col,'col')}</div><label>Select Size</label><div class="opt">${opts(x.s,'size')}</div>${x.out?'<p style="color:var(--acc);font-weight:700;margin-top:12px">Currently Sold Out</p>':'<button class="btn full" id="addBtn" style="margin-top:8px">Add to shopping bag</button>'}`;
+  $('mbody').innerHTML=`<button class="x" data-close="modal">×</button><div class="ph" style="background:${bg(x)};aspect-ratio:16/9;border-radius:12px;margin-bottom:14px">${x.img?'':x.n}</div><h2 style="font-size:22px;margin-bottom:4px">${x.n}</h2><div class="pr" style="color:var(--acc);font-weight:800;font-size:18px;margin-bottom:10px">${fmt(x.p)}</div><p style="color:var(--mut);margin-bottom:14px;font-size:13px">${x.d||'No description provided.'}</p><label>Select Colour</label><div class="opt">${opts(x.col,'col')}</div><label>Select Size</label><div class="opt">${opts(x.s,'size')}</div>${x.out?'<p style="color:var(--acc);font-weight:700;margin-top:10px">Currently Sold Out</p>':'<button class="btn full" id="addBtn" style="margin-top:6px">Add to shopping bag</button>'}`;
   $('modal').classList.add('on');
 }
 $('mbody').onclick=e=>{
@@ -221,7 +233,8 @@ $('mbody').onclick=e=>{
   if(t.id==='addBtn'){
     const f=cart.find(i=>i.id===sel.id&&i.col===sel.col&&i.size===sel.size);
     if(f)f.q++;else cart.push({...sel,q:1});
-    save();count();$('modal').classList.remove('on');openCart();
+    save();count();$('modal').classList.remove('on');
+    showToast('✨ Added to your shopping bag!');
   }
 };
 $('modal').onclick=e=>{if(e.target.id==='modal')$('modal').classList.remove('on')};
@@ -231,14 +244,14 @@ const total=()=>cart.reduce((s,i)=>s+find(i.id).p*i.q,0);
 
 function openCart(){
   const rows=cart.map((i,k)=>{const x=find(i.id);return `<div class="row"><div class="sw" style="background:${bg(x)}"></div><div class="t"><b>${x.n}</b><br><small>${i.col}, Size ${i.size}</small><br><b style="color:var(--acc)">${fmt(x.p)}</b></div><div class="q"><button data-m="${k}">−</button><span>${i.q}</span><button data-p="${k}">+</button></div></div>`}).join('');
-  $('dbody').innerHTML=`<button class="x" data-close="drawer">×</button><h2 style="font-size:24px;margin-bottom:16px">Your Shopping Bag</h2>`+(cart.length?`${rows}<div class="tot"><span>Total</span><span>${fmt(total())}</span></div>
+  $('dbody').innerHTML=`<button class="x" data-close="drawer">×</button><h2 style="font-size:22px;margin-bottom:14px">Your Shopping Bag</h2>`+(cart.length?`${rows}<div class="tot"><span>Total</span><span>${fmt(total())}</span></div>
   <label>Your Name</label><input id="cn" autocomplete="name" placeholder="e.g. Ama Mensah">
   <label>Phone Number</label><input id="cp" type="tel" autocomplete="tel" placeholder="e.g. 0501234567">
   <label>Email Address (for your receipt)</label><input id="ce" type="email" autocomplete="email" placeholder="name@example.com">
   <label>Delivery Address / City</label><textarea id="ca" rows="2" placeholder="House address or landmark"></textarea>
   <button class="btn full" id="pay" style="background:var(--leaf)">Pay Now with Paystack</button>
-  <button class="btn full" id="order" style="background:var(--acc2);margin-top:10px">Order via WhatsApp (Pay on Delivery)</button>
-  <p style="font-size:12px;color:var(--mut);margin-top:12px;text-align:center">We confirm stock &amp; arrange delivery instantly via WhatsApp.</p>`:'<p style="margin-top:24px;color:var(--mut);text-align:center">Your cart is currently empty.</p>');
+  <button class="btn full" id="order" style="background:var(--acc2);margin-top:8px">Order via WhatsApp (Pay on Delivery)</button>
+  <p style="font-size:11px;color:var(--mut);margin-top:10px;text-align:center">We confirm stock &amp; arrange delivery instantly via WhatsApp.</p>`:'<p style="margin-top:20px;color:var(--mut);text-align:center">Your cart is currently empty.</p>');
   $('drawer').classList.add('on');
   if($('pay')&&(typeof PaystackPop==='undefined'||PAYSTACK_KEY.includes('PASTE'))){$('pay').style.display='none';$('order').textContent='Order on WhatsApp';}
 }
@@ -246,7 +259,7 @@ function mkOrder(n,p,a,em,amt,method){return{items:cart.map(i=>{const x=find(i.i
 function paid(ref,n,p,a,items,amt){
   cart=[];save();count();
   const msg=`✅ PAID WITH PAYSTACK\n${STORE} order\nPaystack ref: ${ref}\n\n${items}\nTotal: ${fmt(amt)}\nName: ${n}\nPhone: ${p}\nDelivery: ${a}`;
-  $('dbody').innerHTML=`<button class="x" data-close="drawer">×</button><h2 style="font-size:24px">Thank you!</h2><p style="margin:12px 0">Payment received successfully. Reference: <b>${ref}</b>.</p><p style="color:var(--mut);margin-bottom:20px">Click below to send your order summary to our team on WhatsApp so we can expedite delivery.</p><a class="btn full" target="_blank" href="https://wa.me/${WA}?text=${encodeURIComponent(msg)}" style="background:var(--leaf)">Send Order Details on WhatsApp</a>`;
+  $('dbody').innerHTML=`<button class="x" data-close="drawer">×</button><h2 style="font-size:22px">Thank you!</h2><p style="margin:10px 0">Payment received successfully. Reference: <b>${ref}</b>.</p><p style="color:var(--mut);margin-bottom:16px">Click below to send your order summary to our team on WhatsApp so we can expedite delivery.</p><a class="btn full" target="_blank" href="https://wa.me/${WA}?text=${encodeURIComponent(msg)}" style="background:var(--leaf)">Send Order Details on WhatsApp</a>`;
   try{window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(msg),'_blank')}catch(e){}
 }
 $('cartBtn').onclick=openCart;
@@ -311,38 +324,38 @@ onAuthStateChanged(auth,u=>{
 function shrink(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,700/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);res(c.toDataURL('image/jpeg',.65))};im.onerror=rej;im.src=r.result};r.onerror=rej;r.readAsDataURL(file)})}
 
 const newCount=()=>orders.filter(o=>!o.status||o.status==='new').length;
-const tabs=()=>`<div style="display:flex;gap:8px;margin:16px 0"><button class="o${tab==='products'?' on':''}" data-a="tab" data-v="products">Products</button><button class="o${tab==='orders'?' on':''}" data-a="tab" data-v="orders">Orders ${newCount()?'('+newCount()+')':''}</button></div>`;
+const tabs=()=>`<div style="display:flex;gap:8px;margin:14px 0"><button class="o${tab==='products'?' on':''}" data-a="tab" data-v="products">Products</button><button class="o${tab==='orders'?' on':''}" data-a="tab" data-v="orders">Orders ${newCount()?'('+newCount()+')':''}</button></div>`;
 function ordersView(){
   const rows=orders.map(o=>{
     const items=(o.items||[]).map(i=>`${i.q} x ${esc(i.n)} (${esc(i.col)}, ${esc(i.size)})`).join('<br>');
     const ph=String(o.phone||'').replace(/\D/g,''),wa=ph.startsWith('0')?'233'+ph.slice(1):ph;
     const d=o.t?new Date(o.t).toLocaleString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}):'';
     const stat={new:'New',paid:'Paid',delivered:'Delivered'}[o.status]||'New';
-    return `<div style="border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:12px;background:#fff"><div style="display:flex;justify-content:space-between;gap:8px"><b>${esc(o.name)}</b><span style="font-size:12px;color:var(--mut)">${d}</span></div><div style="font-size:13px;margin:8px 0">${items}</div><div style="font-weight:800;color:var(--acc)">GH₵${Number(o.total||0).toFixed(2)} <small style="color:var(--mut);font-weight:400">· ${o.method==='paystack'?'Paystack':'WhatsApp'}${o.ref?' · Ref '+esc(o.ref):''}</small></div><div style="font-size:13px;margin:8px 0">${esc(o.phone)}${o.email?' · '+esc(o.email):''}<br>${esc(o.address)}</div><div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:10px"><span class="o on" style="padding:4px 10px">${stat}</span><button class="o" data-a="ostat" data-id="${o.id}" data-s="paid">Mark Paid</button><button class="o" data-a="ostat" data-id="${o.id}" data-s="delivered">Delivered</button><a class="o" style="text-decoration:none" href="tel:${esc(o.phone)}">Call</a><a class="o" style="text-decoration:none" target="_blank" href="https://wa.me/${wa}">WhatsApp</a><button class="o" data-a="odel" data-id="${o.id}" style="color:var(--acc)">Delete</button></div></div>`}).join('');
-  return `<button class="x" data-a="close">×</button>${tabs()}<h2>Customer Orders</h2><div style="margin:12px 0"><button class="o" data-a="out">Sign Out</button></div>${rows||'<p style="color:var(--mut)">No orders received yet.</p>'}`;
+    return `<div style="border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:10px;background:#fff"><div style="display:flex;justify-content:space-between;gap:8px"><b>${esc(o.name)}</b><span style="font-size:11px;color:var(--mut)">${d}</span></div><div style="font-size:13px;margin:6px 0">${items}</div><div style="font-weight:800;color:var(--acc)">GH₵${Number(o.total||0).toFixed(2)} <small style="color:var(--mut);font-weight:400">· ${o.method==='paystack'?'Paystack':'WhatsApp'}${o.ref?' · Ref '+esc(o.ref):''}</small></div><div style="font-size:13px;margin:6px 0">${esc(o.phone)}${o.email?' · '+esc(o.email):''}<br>${esc(o.address)}</div><div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:8px"><span class="o on" style="padding:3px 8px;font-size:12px">${stat}</span><button class="o" data-a="ostat" data-id="${o.id}" data-s="paid" style="font-size:12px;padding:4px 10px">Mark Paid</button><button class="o" data-a="ostat" data-id="${o.id}" data-s="delivered" style="font-size:12px;padding:4px 10px">Delivered</button><a class="o" style="text-decoration:none;font-size:12px;padding:4px 10px" href="tel:${esc(o.phone)}">Call</a><a class="o" style="text-decoration:none;font-size:12px;padding:4px 10px" target="_blank" href="https://wa.me/${wa}">WhatsApp</a><button class="o" data-a="odel" data-id="${o.id}" style="color:var(--acc);font-size:12px;padding:4px 10px">Delete</button></div></div>`}).join('');
+  return `<button class="x" data-a="close">×</button>${tabs()}<h2>Customer Orders</h2><div style="margin:10px 0"><button class="o" data-a="out">Sign Out</button></div>${rows||'<p style="color:var(--mut)">No orders received yet.</p>'}`;
 }
 function renderAdmin(){
   const b=$('abody');if(!$('admin').classList.contains('on'))return;
   if(!user){
-    b.innerHTML=`<button class="x" data-a="close">×</button><h2 style="font-size:24px;margin-bottom:8px">Staff Portal Login</h2><p style="color:var(--mut);margin-bottom:20px;font-size:14px">Sign in to manage inventory and view customer orders.</p><label>Email Address</label><input id="ae" type="email" autocomplete="email"><label>Password</label><input id="ap" type="password" autocomplete="current-password"><p style="color:var(--acc);font-size:13px;margin-bottom:10px">${esc(err)}</p><button class="btn full" data-a="login">Sign In</button>`;return;
+    b.innerHTML=`<button class="x" data-a="close">×</button><h2 style="font-size:22px;margin-bottom:6px">Staff Portal Login</h2><p style="color:var(--mut);margin-bottom:16px;font-size:13px">Sign in to manage inventory and view customer orders.</p><label>Email Address</label><input id="ae" type="email" autocomplete="email"><label>Password</label><input id="ap" type="password" autocomplete="current-password"><p style="color:var(--acc);font-size:12px;margin-bottom:10px">${esc(err)}</p><button class="btn full" data-a="login">Sign In</button>`;return;
   }
   if(view==='form'){
     const x=editing||{n:'',c:'Women',p:'',col:[],s:[],d:'',out:false};
     const cats=[...new Set(['Women','Men','Kids',...list.map(p=>p.c)])];
-    b.innerHTML=`<button class="x" data-a="close">×</button><h2 style="font-size:24px;margin-bottom:16px">${editing?'Edit Product':'Add New Product'}</h2>
-    <label>Product Photo</label><div id="prev" style="height:180px;border-radius:12px;margin-bottom:12px;background:${img?"url('"+img+"') center/cover":'var(--line)'};border:2px dashed var(--line)"></div><input id="f-img" type="file" accept="image/*" style="margin-bottom:16px">
+    b.innerHTML=`<button class="x" data-a="close">×</button><h2 style="font-size:22px;margin-bottom:14px">${editing?'Edit Product':'Add New Product'}</h2>
+    <label>Product Photo</label><div id="prev" style="height:150px;border-radius:10px;margin-bottom:10px;background:${img?"url('"+img+"') center/cover":'var(--line)'};border:2px dashed var(--line)"></div><input id="f-img" type="file" accept="image/*" style="margin-bottom:12px">
     <label>Product Name</label><input id="f-n" value="${esc(x.n)}">
     <label>Category</label><input id="f-c" list="cats" value="${esc(x.c)}"><datalist id="cats">${cats.map(c=>`<option value="${esc(c)}">`).join('')}</datalist>
     <label>Price (GH₵)</label><input id="f-p" type="number" min="0" step="0.01" value="${esc(x.p)}">
     <label>Colours (comma separated)</label><input id="f-col" value="${esc(x.col.join(', '))}" placeholder="e.g. Red, Blue, Gold">
     <label>Sizes (comma separated)</label><input id="f-s" value="${esc(x.s.join(', '))}" placeholder="e.g. S, M, L, XL">
-    <label>Description</label><textarea id="f-d" rows="3">${esc(x.d)}</textarea>
-    <label style="display:flex;align-items:center;margin:16px 0;font-size:15px;color:var(--ink);cursor:pointer"><input type="checkbox" id="f-in" ${x.out?'':'checked'} style="width:20px;height:20px;margin-right:10px">Available in Stock</label>
-    <button class="btn full" data-a="save">Save Product</button><button class="o full" style="margin-top:8px;text-align:center" data-a="cancel">Cancel</button>`;return;
+    <label>Description</label><textarea id="f-d" rows="2">${esc(x.d)}</textarea>
+    <label style="display:flex;align-items:center;margin:12px 0;font-size:14px;color:var(--ink);cursor:pointer"><input type="checkbox" id="f-in" ${x.out?'':'checked'} style="width:18px;height:18px;margin-right:8px">Available in Stock</label>
+    <button class="btn full" data-a="save">Save Product</button><button class="o full" style="margin-top:6px;text-align:center" data-a="cancel">Cancel</button>`;return;
   }
   if(tab==='orders'){b.innerHTML=ordersView();return}
-  const rows=list.map(x=>`<div class="row"><div class="sw" style="background:${x.img?"url('"+x.img+"') center/cover":'linear-gradient(135deg,'+DEF[0]+','+DEF[1]+')'}"></div><div class="t"><b>${esc(x.n)}</b>${x.out?' <small style="color:var(--acc)">(Sold out)</small>':''}<br><small>${esc(x.c)} · GH₵${x.p.toFixed(2)}</small><br><span style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap"><button class="o" data-a="edit" data-id="${x.id}">Edit</button><button class="o" data-a="stock" data-id="${x.id}">${x.out?'Set In Stock':'Mark Sold Out'}</button><button class="o" data-a="del" data-id="${x.id}" style="color:var(--acc)">Delete</button></span></div></div>`).join('');
-  b.innerHTML=`<button class="x" data-a="close">×</button>${tabs()}<h2>Manage Inventory</h2><div style="display:flex;gap:10px;margin:16px 0"><button class="btn" data-a="new">+ Add Product</button><button class="o" data-a="out">Sign Out</button></div>${rows||'<p style="color:var(--mut)">No products added yet. Click “+ Add Product” to get started.</p>'}`;
+  const rows=list.map(x=>`<div class="row"><div class="sw" style="background:${x.img?"url('"+x.img+"') center/cover":'linear-gradient(135deg,'+DEF[0]+','+DEF[1]+')'}"></div><div class="t"><b>${esc(x.n)}</b>${x.out?' <small style="color:var(--acc)">(Sold out)</small>':''}<br><small>${esc(x.c)} · GH₵${x.p.toFixed(2)}</small><br><span style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap"><button class="o" data-a="edit" data-id="${x.id}" style="font-size:12px;padding:4px 10px">Edit</button><button class="o" data-a="stock" data-id="${x.id}" style="font-size:12px;padding:4px 10px">${x.out?'Set In Stock':'Mark Sold Out'}</button><button class="o" data-a="del" data-id="${x.id}" style="color:var(--acc);font-size:12px;padding:4px 10px">Delete</button></span></div></div>`).join('');
+  b.innerHTML=`<button class="x" data-a="close">×</button>${tabs()}<h2>Manage Inventory</h2><div style="display:flex;gap:8px;margin:14px 0"><button class="btn" data-a="new">+ Add Product</button><button class="o" data-a="out">Sign Out</button></div>${rows||'<p style="color:var(--mut)">No products added yet. Click “+ Add Product” to get started.</p>'}`;
 }
 
 $('abody').onclick=async e=>{
