@@ -285,10 +285,10 @@ const total=()=>cart.reduce((s,i)=>s+find(i.id).p*i.q,0);
 function openCart(){
   const rows=cart.map((i,k)=>{const x=find(i.id);return `<div class="row"><div class="sw" style="background:${bg(x)}"></div><div class="t"><b>${x.n}</b><br><small>${i.col}, Size ${i.size}</small><br><b style="color:var(--acc)">${fmt(x.p)}</b></div><div class="q"><button data-m="${k}">−</button><span>${i.q}</span><button data-p="${k}">+</button></div></div>`}).join('');
   $('dbody').innerHTML=`<button class="x" data-close="drawer">×</button><h2 style="font-size:22px;margin-bottom:14px">Your Shopping Bag</h2>`+(cart.length?`${rows}<div class="tot"><span>Total</span><span>${fmt(total())}</span></div>
-  <label>Your Name</label><input id="cn" autocomplete="name" placeholder="e.g. Ama Mensah">
-  <label>Phone Number</label><input id="cp" type="tel" autocomplete="tel" placeholder="e.g. 0501234567">
-  <label>Email Address (for your receipt)</label><input id="ce" type="email" autocomplete="email" placeholder="name@example.com">
-  <label>Delivery Address / City</label><textarea id="ca" rows="2" placeholder="House address or landmark"></textarea>
+  <label>Your Name</label><input id="cn" maxlength="100" autocomplete="name" placeholder="e.g. Ama Mensah">
+  <label>Phone Number</label><input id="cp" type="tel" maxlength="20" autocomplete="tel" placeholder="e.g. 0501234567">
+  <label>Email Address (for your receipt)</label><input id="ce" type="email" maxlength="100" autocomplete="email" placeholder="name@example.com">
+  <label>Delivery Address / City</label><textarea id="ca" rows="2" maxlength="300" placeholder="House address or landmark"></textarea>
   <button class="btn full" id="pay" style="background:var(--leaf)">Pay Now with Paystack</button>
   <button class="btn full" id="order" style="background:var(--acc2);margin-top:8px">Order via WhatsApp (Pay on Delivery)</button>
   <p style="font-size:11px;color:var(--mut);margin-top:10px;text-align:center">We confirm stock &amp; arrange delivery instantly via WhatsApp.</p>`:'<p style="margin-top:20px;color:var(--mut);text-align:center">Your cart is currently empty.</p>');
@@ -326,7 +326,7 @@ $('drawer').onclick=e=>{
     if(!n||!p||!a){alert('Please fill in your name, phone number, and delivery address.');return}
     const lines=cart.map(i=>{const x=find(i.id);return `${i.q} x ${x.n} (${i.col}, ${i.size}) - ${fmt(x.p*i.q)}`}).join('\n');
     const msg=`🕒 ORDER - AWAITING PAYMENT\n${STORE}\nPayment: Pay on delivery / MoMo arrangement\n\n${lines}\n\nTotal: ${fmt(total())}\n\nName: ${n}\nPhone: ${p}\nDelivery: ${a}`;
-    try{window.saveOrder&&window.saveOrder(mkOrder(n,p,a,($('ce')||{}).value||'',total(),'whatsapp'))}catch(e){}
+    try{window.saveOrder&&window.saveOrder(mkOrder(n,p,a,(($('ce')||{}).value||'').trim(),total(),'whatsapp'))}catch(e){}
     window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(msg),'_blank');
   }
 };
@@ -344,13 +344,14 @@ const $=id=>document.getElementById(id);
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 const DEF=['#b82354','#1e153b'];
 let list=[],user=null,editing=null,view='list',err='',img=null,orders=[],tab='products',unsubO=null,analyticsPeriod='daily',analyticsData=null,analyticsBusy=false,analyticsError='';
-window.saveOrder=o=>addDoc(collection(db,'orders'),o).catch(()=>{});
+window.saveOrder=o=>addDoc(collection(db,'orders'),o).catch(e=>console.warn('Order could not be saved. Check the orders Firestore rule.',e));
 
 // Count one visit per browser tab session. A random browser ID estimates unique visitors.
 async function trackWebsiteVisit(){
   try{
     let visitorId=localStorage.getItem('kk_visitor_id');
     if(!visitorId){visitorId=(crypto.randomUUID?crypto.randomUUID():('v-'+Date.now()+'-'+Math.random().toString(36).slice(2)));localStorage.setItem('kk_visitor_id',visitorId)}
+    if(location.hash==='#admin'||localStorage.getItem('kk_skip_tracking'))return;
     if(sessionStorage.getItem('kk_visit_recorded'))return;
     await addDoc(collection(db,'visitorEvents'),{visitorId,createdAt:Date.now()});
     sessionStorage.setItem('kk_visit_recorded','1');
