@@ -238,7 +238,8 @@ try{cart=JSON.parse(localStorage.getItem('cart')||'[]')||[]}catch(e){}
 const save=()=>{try{localStorage.setItem('cart',JSON.stringify(cart))}catch(e){}};
 const grad=g=>`linear-gradient(135deg,${g[0]},${g[1]})`;
 const find=id=>P.find(x=>x.id===id);
-const bg=x=>x.img?"url('"+x.img+"') center/cover":grad(x.g);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const bg=x=>esc(x.img?"url('"+x.img+"') center/cover":grad(x.g));
 
 
 function showToast(msg){
@@ -249,11 +250,11 @@ function showToast(msg){
 }
 
 function chips(){
-  $('chips').innerHTML=['All',...new Set(P.map(x=>x.c).filter(Boolean))].map(c=>`<button class="chip${c===cat?' on':''}" data-c="${c}">${c}</button>`).join('');
+  $('chips').innerHTML=['All',...new Set(P.map(x=>x.c).filter(Boolean))].map(c=>`<button class="chip${c===cat?' on':''}" data-c="${esc(c)}">${esc(c)}</button>`).join('');
 }
 function grid(){
   const l=P.filter(x=>cat==='All'||x.c===cat),m=t=>`<p style="grid-column:1/-1;text-align:center;color:var(--mut);padding:40px 0">${t}</p>`;
-  $('shop').innerHTML=!loaded?m('Loading latest styles…'):!l.length?m('No products available in this category right now.'):l.map(x=>`<button class="card" data-id="${x.id}"><div class="ph" style="background:${bg(x)}">${x.img?'':x.n}</div><div class="in"><div><h3>${x.n}</h3><small>${x.out?'Sold out':x.col.length+(x.col.length===1?' colour':' colours available')}</small></div><div class="card-meta"><div class="pr">${fmt(x.p)}</div><span style="font-size:12px;font-weight:700;color:var(--acc)">View →</span></div></div></button>`).join('');
+  $('shop').innerHTML=!loaded?m('Loading latest styles…'):!l.length?m('No products available in this category right now.'):l.map(x=>`<button class="card" data-id="${esc(x.id)}"><div class="ph" style="background:${bg(x)}">${x.img?'':esc(x.n)}</div><div class="in"><div><h3>${esc(x.n)}</h3><small>${x.out?'Sold out':x.col.length+(x.col.length===1?' colour':' colours available')}</small></div><div class="card-meta"><div class="pr">${fmt(x.p)}</div><span style="font-size:12px;font-weight:700;color:var(--acc)">View →</span></div></div></button>`).join('');
 }
 window.setProducts=l=>{P=l;loaded=true;if(cat!=='All'&&!P.some(x=>x.c===cat))cat='All';cart=cart.filter(i=>find(i.id));save();count();chips();grid()};
 $('chips').onclick=e=>{const c=e.target.dataset.c;if(c){cat=c;chips();grid()}};
@@ -262,8 +263,8 @@ $('shop').onclick=e=>{const b=e.target.closest('.card');if(b)openProduct(b.datas
 let sel={};
 function openProduct(id){
   const x=find(id);sel={id,col:x.col[0],size:x.s[0]};
-  const opts=(arr,k)=>arr.map(v=>`<button class="o${sel[k]===v?' on':''}" data-k="${k}" data-v="${v}">${v}</button>`).join('');
-  $('mbody').innerHTML=`<button class="x" data-close="modal">×</button><div class="ph" style="background:${bg(x)};aspect-ratio:16/9;border-radius:12px;margin-bottom:14px">${x.img?'':x.n}</div><h2 style="font-size:22px;margin-bottom:4px">${x.n}</h2><div class="pr" style="color:var(--acc);font-weight:800;font-size:18px;margin-bottom:10px">${fmt(x.p)}</div><p style="color:var(--mut);margin-bottom:14px;font-size:13px">${x.d||'No description provided.'}</p><label>Select Colour</label><div class="opt">${opts(x.col,'col')}</div><label>Select Size</label><div class="opt">${opts(x.s,'size')}</div>${x.out?'<p style="color:var(--acc);font-weight:700;margin-top:10px">Currently Sold Out</p>':'<button class="btn full" id="addBtn" style="margin-top:6px">Add to shopping bag</button>'}`;
+  const opts=(arr,k)=>arr.map(v=>`<button class="o${sel[k]===v?' on':''}" data-k="${k}" data-v="${esc(v)}">${esc(v)}</button>`).join('');
+  $('mbody').innerHTML=`<button class="x" data-close="modal">×</button><div class="ph" style="background:${bg(x)};aspect-ratio:16/9;border-radius:12px;margin-bottom:14px">${x.img?'':esc(x.n)}</div><h2 style="font-size:22px;margin-bottom:4px">${esc(x.n)}</h2><div class="pr" style="color:var(--acc);font-weight:800;font-size:18px;margin-bottom:10px">${fmt(x.p)}</div><p style="color:var(--mut);margin-bottom:14px;font-size:13px">${esc(x.d)||'No description provided.'}</p><label>Select Colour</label><div class="opt">${opts(x.col,'col')}</div><label>Select Size</label><div class="opt">${opts(x.s,'size')}</div>${x.out?'<p style="color:var(--acc);font-weight:700;margin-top:10px">Currently Sold Out</p>':'<button class="btn full" id="addBtn" style="margin-top:6px">Add to shopping bag</button>'}`;
   $('modal').classList.add('on');
 }
 $('mbody').onclick=e=>{
@@ -283,7 +284,7 @@ const count=()=>$('cnt').textContent=cart.reduce((s,i)=>s+i.q,0);
 const total=()=>cart.reduce((s,i)=>s+find(i.id).p*i.q,0);
 
 function openCart(){
-  const rows=cart.map((i,k)=>{const x=find(i.id);return `<div class="row"><div class="sw" style="background:${bg(x)}"></div><div class="t"><b>${x.n}</b><br><small>${i.col}, Size ${i.size}</small><br><b style="color:var(--acc)">${fmt(x.p)}</b></div><div class="q"><button data-m="${k}">−</button><span>${i.q}</span><button data-p="${k}">+</button></div></div>`}).join('');
+  const rows=cart.map((i,k)=>{const x=find(i.id);return `<div class="row"><div class="sw" style="background:${bg(x)}"></div><div class="t"><b>${esc(x.n)}</b><br><small>${esc(i.col)}, Size ${esc(i.size)}</small><br><b style="color:var(--acc)">${fmt(x.p)}</b></div><div class="q"><button data-m="${k}">−</button><span>${i.q}</span><button data-p="${k}">+</button></div></div>`}).join('');
   $('dbody').innerHTML=`<button class="x" data-close="drawer">×</button><h2 style="font-size:22px;margin-bottom:14px">Your Shopping Bag</h2>`+(cart.length?`${rows}<div class="tot"><span>Total</span><span>${fmt(total())}</span></div>
   <label>Your Name</label><input id="cn" maxlength="100" autocomplete="name" placeholder="e.g. Ama Mensah">
   <label>Phone Number</label><input id="cp" type="tel" maxlength="20" autocomplete="tel" placeholder="e.g. 0501234567">
@@ -299,7 +300,7 @@ function mkOrder(n,p,a,em,amt,method){return{items:cart.map(i=>{const x=find(i.i
 function paid(ref,n,p,a,items,amt){
   cart=[];save();count();
   const msg=`✅ PAID WITH PAYSTACK\n${STORE} order\nPaystack ref: ${ref}\n\n${items}\nTotal: ${fmt(amt)}\nName: ${n}\nPhone: ${p}\nDelivery: ${a}`;
-  $('dbody').innerHTML=`<button class="x" data-close="drawer">×</button><h2 style="font-size:22px">Thank you!</h2><p style="margin:10px 0">Payment received successfully. Reference: <b>${ref}</b>.</p><p style="color:var(--mut);margin-bottom:16px">Click below to send your order summary to our team on WhatsApp so we can expedite delivery.</p><a class="btn full" target="_blank" href="https://wa.me/${WA}?text=${encodeURIComponent(msg)}" style="background:var(--leaf)">Send Order Details on WhatsApp</a>`;
+  $('dbody').innerHTML=`<button class="x" data-close="drawer">×</button><h2 style="font-size:22px">Thank you!</h2><p style="margin:10px 0">Payment received successfully. Reference: <b>${esc(ref)}</b>.</p><p style="color:var(--mut);margin-bottom:16px">Click below to send your order summary to our team on WhatsApp so we can expedite delivery.</p><a class="btn full" target="_blank" href="https://wa.me/${WA}?text=${encodeURIComponent(msg)}" style="background:var(--leaf)">Send Order Details on WhatsApp</a>`;
   try{window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(msg),'_blank')}catch(e){}
 }
 $('cartBtn').onclick=openCart;
@@ -457,7 +458,7 @@ function renderAdmin(){
   }
   if(tab==='orders'){b.innerHTML=ordersView();return}
   if(tab==='analytics'){b.innerHTML=analyticsView();return}
-  const rows=list.map(x=>`<div class="row"><div class="sw" style="background:${x.img?"url('"+x.img+"') center/cover":'linear-gradient(135deg,'+DEF[0]+','+DEF[1]+')'}"></div><div class="t"><b>${esc(x.n)}</b>${x.out?' <small style="color:var(--acc)">(Sold out)</small>':''}<br><small>${esc(x.c)} · GH₵${x.p.toFixed(2)}</small><br><span style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap"><button class="o" data-a="edit" data-id="${x.id}" style="font-size:12px;padding:4px 10px">Edit</button><button class="o" data-a="stock" data-id="${x.id}" style="font-size:12px;padding:4px 10px">${x.out?'Set In Stock':'Mark Sold Out'}</button><button class="o" data-a="del" data-id="${x.id}" style="color:var(--acc);font-size:12px;padding:4px 10px">Delete</button></span></div></div>`).join('');
+  const rows=list.map(x=>`<div class="row"><div class="sw" style="background:${esc(x.img?"url('"+x.img+"') center/cover":'linear-gradient(135deg,'+DEF[0]+','+DEF[1]+')')}"></div><div class="t"><b>${esc(x.n)}</b>${x.out?' <small style="color:var(--acc)">(Sold out)</small>':''}<br><small>${esc(x.c)} · GH₵${x.p.toFixed(2)}</small><br><span style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap"><button class="o" data-a="edit" data-id="${x.id}" style="font-size:12px;padding:4px 10px">Edit</button><button class="o" data-a="stock" data-id="${x.id}" style="font-size:12px;padding:4px 10px">${x.out?'Set In Stock':'Mark Sold Out'}</button><button class="o" data-a="del" data-id="${x.id}" style="color:var(--acc);font-size:12px;padding:4px 10px">Delete</button></span></div></div>`).join('');
   b.innerHTML=`<button class="x" data-a="close">×</button>${tabs()}<h2>Manage Inventory</h2><div style="display:flex;gap:8px;margin:14px 0"><button class="btn" data-a="new">+ Add Product</button><button class="o" data-a="out">Sign Out</button></div>${rows||'<p style="color:var(--mut)">No products added yet. Click “+ Add Product” to get started.</p>'}`;
 }
 
